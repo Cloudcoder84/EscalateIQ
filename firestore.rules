@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check auth
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(userId);
+    }
+
+    // Mock interview sessions and analytics history per user
+    match /users/{userId}/sessions/{sessionId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Daily schedule tracking and drills per user
+    match /users/{userId}/progress/{progressId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Custom Job Descriptions & Blueprints per user
+    match /users/{userId}/blueprints/{blueprintId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // User custom war stories per user
+    match /users/{userId}/warStories/{storyId} {
+      allow read, write: if isOwner(userId);
+    }
+  }
+}

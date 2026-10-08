@@ -1,0 +1,6 @@
+{
+  "name": "EscalateIQ: Support Engineer Career & Interview Prep Studio",
+  "description": "AI-powered interview simulation and strategic job search accelerator tailored for seasoned Technical Support and Escalation Engineers with advanced degrees.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
